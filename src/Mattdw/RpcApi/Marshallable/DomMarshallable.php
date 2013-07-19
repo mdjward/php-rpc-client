@@ -9,7 +9,7 @@ interface DomMarshallable {
     
     /**
      * 
-     * @return array
+     * @return \DOMElement
      */
     public function toDom();
     

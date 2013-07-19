@@ -9,7 +9,7 @@ interface JsonUnmarshallable {
     
     /**
      * 
-     * @return array
+     * @param string $json
      */
     public static function createFromJson($json);
     

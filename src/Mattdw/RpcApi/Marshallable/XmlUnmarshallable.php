@@ -9,7 +9,7 @@ interface XmlUnmarshallable {
     
     /**
      * 
-     * @return array
+     * @param string $xml
      */
     public static function createFromXml($xml);
     

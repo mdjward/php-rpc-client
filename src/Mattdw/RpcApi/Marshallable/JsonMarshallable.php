@@ -9,7 +9,7 @@ interface JsonMarshallable {
     
     /**
      * 
-     * @return array
+     * @return string
      */
     public function toJson();
     

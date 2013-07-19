@@ -8,7 +8,7 @@ interface DomUnmarshallable {
     
     /**
      * 
-     * @return array
+     * @param \DOMElement $element
      */
     public static function createFromDom(\DOMElement $element);
     

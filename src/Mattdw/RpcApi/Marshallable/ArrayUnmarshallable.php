@@ -9,7 +9,7 @@ interface ArrayUnmarshallable {
     
     /**
      * 
-     * @return array
+     * @param array $array
      */
     public static function createFromArray(array $array);
     

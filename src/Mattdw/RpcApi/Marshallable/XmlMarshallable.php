@@ -9,7 +9,7 @@ interface XmlMarshallable {
     
     /**
      * 
-     * @return array
+     * @return string
      */
     public function toXml();
     
