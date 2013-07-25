@@ -58,6 +58,10 @@ class RequestInitiator {
         // Return the decoded response from an invocation of the HTTP request
         return $this->encoder->decodeResponse($request->send());
     }
+
+    public function getClient() {
+        return $this->client;
+    }
     
     protected function createNamespace($name) {
         
