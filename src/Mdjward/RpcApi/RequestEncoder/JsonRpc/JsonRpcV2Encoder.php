@@ -1,8 +1,6 @@
 <?php
 
-namespace Mattdw\RpcApi\RequestEncoder;
-
-use Guzzle\Http\Message\Response;
+namespace Mdjward\RpcApi\RequestEncoder\JsonRpc;
 
 
 

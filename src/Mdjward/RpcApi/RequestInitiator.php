@@ -1,15 +1,20 @@
 <?php
 
-namespace Mattdw\RpcApi;
+namespace Mdjward\RpcApi;
 
 use Guzzle\Http\Client;
-use Mattdw\RpcApi\RequestEncoder\RpcEncoder;
+use Mdjward\RpcApi\RequestEncoder\RpcEncoder;
 
 
 
 class RequestInitiator {
     
+    /**
+     * 
+     */
     const NAMESPACE_SEPARATOR = ".";
+    
+    
     
     /**
      *

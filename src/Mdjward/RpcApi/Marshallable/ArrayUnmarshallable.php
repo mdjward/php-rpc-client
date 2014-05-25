@@ -1,6 +1,6 @@
 <?php
 
-namespace Mattdw\RpcApi\Marshallable;
+namespace Mdjward\RpcApi\Marshallable;
 
 
 

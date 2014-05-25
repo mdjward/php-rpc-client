@@ -1,8 +1,11 @@
 <?php
 
-namespace Mattdw\RpcApi\RequestEncoder;
+namespace Mdjward\RpcApi\RequestEncoder\JsonRpc;
 
 use Guzzle\Http\Message\Response;
+use Mdjward\RpcApi\RpcErrorException;
+use Mdjward\RpcApi\RpcNoResultException;
+use Mdjward\RpcApi\RequestEncoder\RpcEncoder;
 
 
 
@@ -13,7 +16,17 @@ use Guzzle\Http\Message\Response;
 abstract class AbstractJsonRpcEncoder extends RpcEncoder {
     
     public function decodeResponse(Response $response) {
-        return $response->json();
+        $json = $response->json();
+        
+        if (isset($json["error"])) {
+            throw new RpcErrorException($json["error"]);
+        }
+        
+        if (!isset($json["result"])) {
+            throw new RpcNoResultException();
+        }
+        
+        return $json["result"];
     }
     
     protected function produceJsonEncodeableArray($method, array $parameters, $identifier = null) {

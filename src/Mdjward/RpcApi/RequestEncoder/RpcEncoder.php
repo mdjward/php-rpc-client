@@ -1,6 +1,6 @@
 <?php
 
-namespace Mattdw\RpcApi\RequestEncoder;
+namespace Mdjward\RpcApi\RequestEncoder;
 
 use Guzzle\Http\Message\Response;
 
@@ -17,4 +17,3 @@ abstract class RpcEncoder {
     public abstract function decodeResponse(Response $response);
     
 }
-
