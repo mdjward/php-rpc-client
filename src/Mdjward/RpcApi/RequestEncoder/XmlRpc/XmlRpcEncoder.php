@@ -85,7 +85,10 @@ class XmlRpcEncoder extends RpcEncoder {
                 true
             );
             
-            $paramsElement->appendChild($importedParamNode);
+            $paramElement = $dom->createElement("param");
+            $paramElement->appendChild($importedParamNode);
+            
+            $paramsElement->appendChild($paramElement);
         }
         
         $callElement->appendChild($methodNameElement);
@@ -104,18 +107,18 @@ class XmlRpcEncoder extends RpcEncoder {
         $faultElement = $xpath->query("/methodResponse/fault");
         
         if ($faultElement->length > 0) {
-            $errorCodeList = $xpath->query("/methodResponse/fault/value/struct/member[name='faultCode']/value/int");
-            $errorMessageList = $xpath->query("/methodResponse/fault/value/struct/member[name='faultString']/value/string");
+            $errorCodeList = $xpath->query("/methodResponse/fault[1]/value[1]/struct[1]/member[name='faultCode']/value/int");
+            $errorMessageList = $xpath->query("/methodResponse/fault[1]/value[1]/struct[1]/member[name='faultString']/value/string");
             
             $errorCode = ($errorCodeList->length > 0 ? (int) $errorCodeList->item(0)->nodeValue : null);
-            $errorMessage = ($errorMessageList->length > 0 ? (string) $errorCodeList->item(0)->nodeValue : "");
+            $errorMessage = ($errorMessageList->length > 0 ? (string) $errorMessageList->item(0)->nodeValue : "");
             
             throw new RpcErrorException($errorMessage, $errorCode);
         }
         
         if (($params = $xpath->evaluate("/methodResponse/params/param")) instanceof DomNodeList && $params->length > 0) {
             $results = array();
-            
+
             foreach ($params as $paramElement) {
                 $results[] = $this->parameterDeserializer->getValueFromDomElement($paramElement);
             }
@@ -123,7 +126,7 @@ class XmlRpcEncoder extends RpcEncoder {
             return $results;
         }
         
-        throw new RpcNoResultException("Empty or invalid response");
+        throw new RpcNoResultException();
     }
     
     /**

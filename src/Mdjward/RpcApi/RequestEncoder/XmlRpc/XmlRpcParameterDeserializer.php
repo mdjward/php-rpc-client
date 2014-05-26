@@ -25,13 +25,30 @@ use DOMXPath;
  */
 class XmlRpcParameterDeserializer {
     
+    /**
+     *
+     * @var \Mdjward\RpcApi\RequestEncoder\XmlRpc\XmlRpcParameterFactory
+     */
+    protected $parameterFactory;
+    
+    /**
+     *
+     * @var boolean
+     */
     protected $forceAssociativeArraysForStructs;
+    
+    
     
     /**
      * 
+     * @param \Mdjward\RpcApi\RequestEncoder\XmlRpc\XmlRpcParameterFactory $parameterFactory
      * @param boolean $forceAssociativeArraysForStructs
      */
-    public function __construct($forceAssociativeArraysForStructs = false) {
+    public function __construct(
+        XmlRpcParameterFactory $parameterFactory,
+        $forceAssociativeArraysForStructs = false
+    ) {
+        $this->parameterFactory = $parameterFactory;
         $this->forceAssociativeArraysForStructs = ($forceAssociativeArraysForStructs === true);
     }
     
@@ -41,13 +58,7 @@ class XmlRpcParameterDeserializer {
      * @return \Mdjward\RpcApi\RequestEncoder\XmlRpc\XmlRpcParameter
      */
     public function getXmlRpcParameterFromDomElement(DOMElement $element) {
-        
-        $xpath = new DOMXPath($element->ownerDocument);
-        
-        return new XmlRpcParameter(
-            $this->getValueFromDomElement($element),
-            $xpath->query("./*", $element)->item(0)->nodeName
-        );
+        return $this->parameterFactory->fromValue($this->getValueFromDomElement($element));
     }
     
     /**

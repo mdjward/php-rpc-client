@@ -27,6 +27,11 @@ use DOMText;
 class XmlRpcParameterSerializer {
 
     /**
+     * 
+     */
+    const NIL_ELEMENT_NAME = "nil";
+    
+    /**
      *
      * @var \Mdjward\RpcApi\RequestEncoder\XmlRpc\XmlRpcParameterFactory
      */
@@ -59,6 +64,9 @@ class XmlRpcParameterSerializer {
     public function getDomElementFromParameter(XmlRpcParameter $parameter) {
         
         switch (($type = $parameter->getType())) {
+            case XmlRpcParameter::TYPE_NIL:
+                return $this->domDocument->createElement(static::NIL_ELEMENT_NAME);
+            
             case XmlRpcParameter::TYPE_ARRAY:
                 return $this->formatArray($parameter);
                 
