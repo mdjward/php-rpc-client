@@ -13,7 +13,7 @@ The library aims to provide a simple, transparent means of working with RPC-base
 Making a request
 ----------------
 
-Generally this library takes advantage of magic methods in PHP (specifically __get and __call), in much the same way as the PHP SOAP client to invoke web service methods under multiple levels of namespace.
+Generally this library takes advantage of [magic methods](http://www.php.net/manual/en/language.oop5.magic.php) in PHP (specifically [__get](http://www.php.net/manual/en/language.oop5.overloading.php#object.get) and [__call](http://www.php.net/manual/en/language.oop5.overloading.php#object.call)), in much the same way as the PHP SOAP client to invoke web service methods under multiple levels of namespace.
 
 ### Example: Updating XBMC's media library
 
@@ -44,7 +44,7 @@ $response = $initiator->VideoLibrary->Scan("");
 
 This should produce a ```string``` "OK", as the principle result of the method.
 
-However, since magic method resolution is well known to have extremely poor performance, you are advised to extend the RequestInitiator class for purpose-specific APIs and create purpose-specific methods (and, potentially, fields/properties), as in the example below (although probably not with a public property, and possibly with dependency injection as opposed to tight coupling).
+However, since magic method resolution is [well known to have extremely poor performance](https://arnisoft.com/php-magic-methods-performance/), you are advised to extend the RequestInitiator class for purpose-specific APIs and create purpose-specific methods (and, potentially, fields/properties), as in the example below (although probably not with a public property, and possibly with dependency injection as opposed to tight coupling).
 
 ```php
 <?php
@@ -55,7 +55,7 @@ class XbmcRequestInitiator extends RequestInitiator {
     
     public $videoLibrary;
     
-    public function __construct(Client $client, RpcEncoder $encoder) {
+    public function __construct(Client $client, JsonRpcV2Encoder $encoder) {
         parent::__construct($client, $encoder, "");
         
         $this->videoLibrary = new VideoLibraryRequestInitiator($client, $encoder);
@@ -67,7 +67,7 @@ class XbmcRequestInitiator extends RequestInitiator {
 
 class VideoLibraryRequestInitiator extends RequestInitiator {
     
-    public function __construct() {
+    public function __construct(Client $client, JsonRpcV2Encoder $encoder) {
         parent::__construct($client, $encoder, "VideoLibrary");
     }
     
