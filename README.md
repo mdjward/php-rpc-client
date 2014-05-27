@@ -37,7 +37,7 @@ $encoder = new JsonRpcV2Encoder();
 // Initialise the initiator!
 $initiator = new RequestInitiator($client, $encoder);
 
-// Use a 
+// Invoke the Scan method and store the response in variable $response
 $response = $initiator->VideoLibrary->Scan("");
 
 ```
@@ -82,7 +82,7 @@ class VideoLibraryRequestInitiator extends RequestInitiator {
 // Initialise the XBMC initiator!
 $initiator = new XbmcRequestInitiator($client, $encoder);
 
-// Use
+// Invoke the Scan method and store the response in variable $response
 $response = $initiator->videoLibrary->scan("");
 
 
