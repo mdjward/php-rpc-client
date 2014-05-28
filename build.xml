@@ -16,7 +16,7 @@
     - ${PURGE_VENDORS}: Indicates that the composer vendors directory should be purged prior to "composer install"
 -->
 
-<project name="FerendaBuild" default="clean-build">
+<project name="PHPRPC" default="build">
 
     <!-- Identify src, build and Symfony2-config directories referenced frequently throughout this build -->
     <property name="SRC_DIR" value="${basedir}/src"/>
