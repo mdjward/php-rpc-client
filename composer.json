@@ -22,7 +22,7 @@
     "autoload": {
         "psr-4": {
             "Mdjward\\RpcApi\\Test\\": "test/Mdjward/RpcApi/Test/",
-            "": "src/"
+            "Mdjward\\RpcApi\\": "src/Mdjward/RpcApi/"
         }
     }
 }
